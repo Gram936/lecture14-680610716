@@ -6,12 +6,14 @@ import { useState } from "react";
 export default function ModalRegister() {
   // STEP 1 - 1.1. : การสร้าง State สำหรับเก็บข้อมูลฟอร์ม (useState)
   // STEP 5 : Form Submission + โดยมีระบบ Checkbox ยอมรับเงื่อนไข + Form Validation
-  // STEP 5 - 5.1. : ระบบยอมรับเงื่อนไขก่อนกดปุ่ม (useState)
+  // STEP 5 - 5.1. : การประกาศ State สำหรับคุม Checkbox และ Error (useState)
   // STEP 1 - 1.2. : ฟังก์ชันอัปเดตข้อมูลแบบไดนามิก (updateForm)
+  // STEP 5 : Form Submission + โดยมีระบบ Checkbox ยอมรับเงื่อนไข + Form Validation
+  // STEP 5 - 5.2. : ระบบยอมรับเงื่อนไขก่อนกดปุ่ม (disabled)
   // STEP 4 : Total Payment (realtime)
   // STEP 4 - 4.1. : ฟังก์ชันคำนวณราคา (computeTotalPayment)
   // STEP 5 : Form Submission + โดยมีระบบ Checkbox ยอมรับเงื่อนไข + Form Validation
-  // STEP 5 - 5.3. : การตรวจสอบข้อมูลก่อนส่ง (registerBtnOnClick)
+  // STEP 5 - 5.3. : ฟังก์ชันตรวจสอบข้อมูลเมื่อกดปุ่ม (registerBtnOnClick)
   return (
     <>
       <div
@@ -43,14 +45,14 @@ export default function ModalRegister() {
                 <div>
                   <label className="form-label">First name</label>
                   {/* STEP 1 - 1.3. : สามารถส่งชื่อฟิลด์และค่าจาก input เมื่อพิมพ์ชื่อ*/}
+                  {/* STEP 5 : Form Submission + โดยมีระบบ Checkbox ยอมรับเงื่อนไข + Form Validation  */}
+                  {/* STEP 5 - 5.5. : การแสดงสถานะ Error บน Bootstrap Form (is-invalid) */}
                   <input className={"form-control"} value={""} />
-                  {/* STEP 5 - 5.4. : สำหรับ Bootstrap Form แสดง Invalid first name */}
                 </div>
                 <div>
                   <label className="form-label">Last name</label>
                   {/* STEP 1 - 1.4. : สามารถส่งชื่อฟิลด์และค่าจาก input เมื่อพิมพ์ชื่อ*/}
                   <input className="form-control" value={""} />
-                  {/* STEP 5 - 5.5. : สำหรับ Bootstrap Form แสดง Invalid last name */}
                 </div>
               </div>
 
@@ -88,8 +90,8 @@ export default function ModalRegister() {
             </div>
 
             <div className="modal-footer">
-              {/* STEP 5 : Form Submission + โดยมีระบบ Checkbox ยอมรับเงื่อนไข + Form Validation */}
-              {/* STEP 5 - 5.2. : ระบบยอมรับเงื่อนไขก่อนกดปุ่ม (disabled) */}
+              {/* STEP 5 : Form Submission + โดยมีระบบ Checkbox ยอมรับเงื่อนไข + Form Validation  */}
+              {/* STEP 5 - 5.4. : การผูก Checkbox และการเปิด/ปิดปุ่ม Register */}
               {/* Terms and conditions */}
               <div>
                 <input className="me-2 form-check-input" type="checkbox" />I

@@ -131,18 +131,27 @@ const computeTotalPayment = () => {
 `src/component/ModalRegister.tsx`
 
 ```tsx
-//5.1. ระบบยอมรับเงื่อนไขก่อนกดปุ่ม (useState)
+//5.1. การประกาศ State สำหรับคุม Checkbox และ Error (useState)
 const [agree, setAgree] = useState(false);
+
+const [errors, setErrors] = useState({
+  fname: false,
+  lname: false,
+  plan: false,
+  gender: false,
+});
 ```
 
 ```tsx
-//5.2. ระบบยอมรับเงื่อนไขก่อนกดปุ่ม (disabled)
-<input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} />
-<button onClick={registerBtnOnClick} disabled={!agree}>Register</button>
+//5.2. การอัปเดตฟอร์มพร้อมล้างสถานะ Error
+const updateForm = (key: keyof RegisterForm, value: string) => {
+  setForm((prev) => ({ ...prev, [key]: value }));
+  setErrors((prev) => ({ ...prev, [key]: false }));
+};
 ```
 
 ```tsx
-//5.3. การตรวจสอบข้อมูลก่อนส่ง (registerBtnOnClick)
+//5.3. ฟังก์ชันตรวจสอบข้อมูลเมื่อกดปุ่ม (registerBtnOnClick)
 const registerBtnOnClick = () => {
   const newErrors = {
     fname: form.fname === "",
@@ -163,17 +172,39 @@ const registerBtnOnClick = () => {
 ```
 
 ```tsx
-//5.4. สำหรับ Bootstrap Form แสดง Invalid first name
+//5.4. การผูก Checkbox และการเปิด/ปิดปุ่ม Register
+<input
+type="checkbox"
+checked={agree}
+onChange={(e) => setAgree(e.target.checked)}
+/> I agree to the terms and conditions
+
+<button
+className="btn btn-success my-2"
+onClick={registerBtnOnClick}
+disabled={!agree}>
+ Register
+</button>
+```
+
+```tsx
+//5.5. การแสดงสถานะ Error บน Bootstrap Form (is-invalid)
+ <input
+className={`form-control ${errors.fname ? "is-invalid" : ""}`}
+onChange={(e) => updateForm("fname", e.target.value)}
+value={form.fname}
+/>
+
 <div className="invalid-feedback">Invalid first name</div>
 ```
 
 ```tsx
-//5.5. สำหรับ Bootstrap Form แสดง Invalid last name
-<div className="invalid-feedback">Invalid last name</div>
-```
-
-```tsx
 //5.6. สำหรับ Bootstrap Form แสดง Invalid plan
+<select
+  className={"form-select" + (errors.plan ? " is-invalid" : "")}
+  onChange={(e) => updateForm("plan", e.target.value)}
+  value={form.plan}
+  >
 <div className="invalid-feedback">Please select a Plan</div>
 ```
 
